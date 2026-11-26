@@ -11,8 +11,18 @@ const MAX_CARS = 3;
 const SENSORS = ["sensor-1", "sensor-2"];
 
 // Makes a random 0 to MAX_CARS fake events: [{ timestamp, direction, speed }]
-function makeEvents() {
-  // TODO
+// direction is "in" or "out". Speed is 5 to 15, one decimal place, like the webapp mocks.
+function makeEvents(direction) {
+  const cars = Math.floor(Math.random() * (MAX_CARS + 1));
+  const events = [];
+  for (let i = 0; i < cars; i++) {
+    events.push({
+      timestamp: new Date().toISOString(),
+      direction,
+      speed: Math.round((5 + Math.random() * 10) * 10) / 10,
+    });
+  }
+  return events;
 }
 
 // Sends one sensor's battery and events to the server.
