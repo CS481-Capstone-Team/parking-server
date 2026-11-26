@@ -26,8 +26,21 @@ function makeEvents(direction) {
 }
 
 // Sends one sensor's battery and events to the server.
+// If the server is down, the events are dropped and it tries again next time.
 async function send(sensorId) {
-  // TODO
+  const direction = sensorId === "sensor-1" ? "in" : "out";
+  const body = { sensorId, battery: 90, events: makeEvents(direction) };
+
+  try {
+    const res = await fetch(SERVER_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    console.log(`${sensorId}: sent ${body.events.length} cars ${direction} (${res.status})`);
+  } catch {
+    console.log(`${sensorId}: server not reachable`);
+  }
 }
 
 // Sends for every sensor, every SEND_EVERY_MS.
