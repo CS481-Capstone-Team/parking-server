@@ -24,13 +24,27 @@ To send fake sensor data without a real sensor, in a second terminal:
 node fake-sensor.js
 ```
 
-To reset all data, stop the server and delete `data/db.json`.
+To reset all data, stop the server and delete `data/database.json`.
+
+## Folder structure (tentative)
+
+```
+parking-server/
+  server.js                   Starts the server.
+  routes.js                   API routes: Sensor, Host, and Guest sections. Same as parking-webapp/mocks/handlers.js.
+  database.js                 Loads and saves data/database.json. Pool count and shared helpers.
+  fake-sensor.js              Sends fake sensor data, for testing without a real sensor.
+  data/
+    demo-data.js              Starting data: establishments and sensors. Used when there is no database.json.
+    database.json             All saved data. Made on first run. Not in git.
+  package.json                Scripts and dependencies.
+```
 
 ## How it fits together
 
 - Sensors send their events and battery to `POST /api/sensor-data` every few seconds.
 - The webapp calls the Host and Guest routes, and polls them to stay up to date.
-- Every route reads and changes the data in memory. After each change the whole thing is written to `data/db.json`.
+- Every route reads and changes the data in memory. After each change the whole thing is written to `data/database.json`.
 - One process does it all. No accounts: every Host request is treated as establishment `est-1`.
 
 # Server Requirements

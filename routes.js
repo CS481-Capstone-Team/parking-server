@@ -1,8 +1,8 @@
-// API routes. Each route reads or changes the data in db.js and returns JSON.
+// API routes. Each route reads or changes the data in database.js and returns JSON.
 // Same routes and shapes as parking-webapp/mocks/handlers.js, plus the sensor route.
 
 import { Router } from "express";
-// TODO: import the data and helpers from db.js once it exists.
+// TODO: import the data and helpers from database.js once it exists.
 
 export const router = Router();
 
