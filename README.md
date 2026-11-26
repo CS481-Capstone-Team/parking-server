@@ -31,7 +31,9 @@ To reset all data, stop the server and delete `data/database.json`.
 ```
 parking-server/
   server.js                   Starts the server.
-  routes.js                   API routes: Sensor, Host, and Guest sections. Same as parking-webapp/mocks/handlers.js.
+  routes/
+    webapp.js                 Host and Guest routes. Same as parking-webapp/mocks/handlers.js.
+    sensor.js                 Sensor route: POST /api/sensor-data.
   database.js                 Loads and saves data/database.json. Pool count and shared helpers.
   fake-sensor.js              Sends fake sensor data, for testing without a real sensor.
   data/
